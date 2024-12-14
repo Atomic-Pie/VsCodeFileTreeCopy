@@ -1,0 +1,52 @@
+{
+    "name": "vscodefiletreecopy",
+    "displayName": "VsCodeFileTreeCopy",
+    "description": "A way to copy the file tree and contents of a vscode project",
+    "publisher": "AtomicPie",
+    "version": "0.0.1",
+    "engines": {
+      "vscode": "^1.96.0"
+    },
+    "main": "./out/extension.js",
+    "contributes": {
+      "commands": [
+        {
+          "command": "copyFileStructure.copy",
+          "title": "Copy File Structure"
+        }
+      ],
+      "menus": {
+        "explorer/context": [
+          {
+            "command": "copyFileStructure.copy",
+            "when": "true",
+            "group": "navigation"
+          }
+        ]
+      },
+      "configuration": {
+        "type": "object",
+        "title": "Copy File Structure",
+        "properties": {
+          "copyFileStructure.allowedExtensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [".js", ".ts"],
+            "description": "List of file extensions to include when copying the file structure. Leave empty to include all files."
+          }
+        }
+      }
+    },
+    "scripts": {
+      "compile": "tsc",
+      "watch": "tsc --watch"
+    },
+    "devDependencies": {
+      "@types/vscode": "^1.96.0",
+      "@types/node": "^20.0.0",
+      "typescript": "^5.7.2"
+    }
+  }
+  
