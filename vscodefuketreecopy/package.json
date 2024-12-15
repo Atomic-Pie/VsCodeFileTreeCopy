@@ -25,16 +25,46 @@
         ]
       },
       "configuration": {
-        "type": "object",
-        "title": "Copy File Structure",
         "properties": {
           "copyFileStructure.allowedExtensions": {
             "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "default": [".js", ".ts"],
-            "description": "List of file extensions to include when copying the file structure. Leave empty to include all files."
+            "items": "string",
+            "default": [],
+            "description": "If specified, only files with these extensions are included. Example: [\".js\", \".ts\"]"
+          },
+          "copyFileStructure.excludedDirectories": {
+            "type": "array",
+            "items": "string",
+            "default": [
+              "**/node_modules",
+              "**/.vscode",
+              "**/.git"
+            ],
+            "description": "Glob patterns of directories to exclude."
+          },
+          "copyFileStructure.excludedFiles": {
+            "type": "array",
+            "items": "string",
+            "default": [
+              "**/*.log",
+              "**/*.tmp"
+            ],
+            "description": "Glob patterns of files to exclude."
+          },
+          "copyFileStructure.maxFileSizeKB": {
+            "type": "number",
+            "default": 0,
+            "description": "Maximum allowed file size in kilobytes. Files larger than this will be skipped. 0 means no limit."
+          },
+          "copyFileStructure.maxFileContentLength": {
+            "type": "number",
+            "default": 0,
+            "description": "Maximum number of characters per file. If exceeded, content will be truncated. 0 means no limit."
+          },
+          "copyFileStructure.maxDepth": {
+            "type": "number",
+            "default": 0,
+            "description": "Maximum depth of directories to traverse. 0 means no limit."
           }
         }
       }
@@ -44,9 +74,13 @@
       "watch": "tsc --watch"
     },
     "devDependencies": {
-      "@types/vscode": "^1.96.0",
+      "@types/micromatch": "^4.0.9",
       "@types/node": "^20.0.0",
+      "@types/vscode": "^1.96.0",
       "typescript": "^5.7.2"
+    },
+    "dependencies": {
+      "micromatch": "^4.0.8"
     }
   }
   
