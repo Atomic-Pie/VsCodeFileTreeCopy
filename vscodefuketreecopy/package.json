@@ -5,82 +5,84 @@
     "publisher": "AtomicPie",
     "version": "0.0.1",
     "engines": {
-      "vscode": "^1.96.0"
+        "vscode": ">=1.30.0"
     },
     "main": "./out/extension.js",
+    "activationEvents": [
+        "onCommand:copyFileStructure.copy"
+    ],
     "contributes": {
-      "commands": [
-        {
-          "command": "copyFileStructure.copy",
-          "title": "Copy File Structure"
+        "commands": [
+            {
+                "command": "copyFileStructure.copy",
+                "title": "Copy File Structure"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "copyFileStructure.copy",
+                    "when": "true",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "configuration": {
+            "properties": {
+                "copyFileStructure.allowedExtensions": {
+                    "type": "array",
+                    "items": "string",
+                    "default": [],
+                    "description": "If specified, only files with these extensions are included. Example: [\".js\", \".ts\"]"
+                },
+                "copyFileStructure.excludedDirectories": {
+                    "type": "array",
+                    "items": "string",
+                    "default": [
+                        "**/node_modules",
+                        "**/.vscode",
+                        "**/.git"
+                    ],
+                    "description": "Glob patterns of directories to exclude."
+                },
+                "copyFileStructure.excludedFiles": {
+                    "type": "array",
+                    "items": "string",
+                    "default": [
+                        "**/*.log",
+                        "**/*.tmp"
+                    ],
+                    "description": "Glob patterns of files to exclude."
+                },
+                "copyFileStructure.maxFileSizeKB": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Maximum allowed file size in kilobytes. Files larger than this will be skipped. 0 means no limit."
+                },
+                "copyFileStructure.maxFileContentLength": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Maximum number of characters per file. If exceeded, content will be truncated. 0 means no limit."
+                },
+                "copyFileStructure.maxDepth": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Maximum depth of directories to traverse. 0 means no limit."
+                }
+            }
         }
-      ],
-      "menus": {
-        "explorer/context": [
-          {
-            "command": "copyFileStructure.copy",
-            "when": "true",
-            "group": "navigation"
-          }
-        ]
-      },
-      "configuration": {
-        "properties": {
-          "copyFileStructure.allowedExtensions": {
-            "type": "array",
-            "items": "string",
-            "default": [],
-            "description": "If specified, only files with these extensions are included. Example: [\".js\", \".ts\"]"
-          },
-          "copyFileStructure.excludedDirectories": {
-            "type": "array",
-            "items": "string",
-            "default": [
-              "**/node_modules",
-              "**/.vscode",
-              "**/.git"
-            ],
-            "description": "Glob patterns of directories to exclude."
-          },
-          "copyFileStructure.excludedFiles": {
-            "type": "array",
-            "items": "string",
-            "default": [
-              "**/*.log",
-              "**/*.tmp"
-            ],
-            "description": "Glob patterns of files to exclude."
-          },
-          "copyFileStructure.maxFileSizeKB": {
-            "type": "number",
-            "default": 0,
-            "description": "Maximum allowed file size in kilobytes. Files larger than this will be skipped. 0 means no limit."
-          },
-          "copyFileStructure.maxFileContentLength": {
-            "type": "number",
-            "default": 0,
-            "description": "Maximum number of characters per file. If exceeded, content will be truncated. 0 means no limit."
-          },
-          "copyFileStructure.maxDepth": {
-            "type": "number",
-            "default": 0,
-            "description": "Maximum depth of directories to traverse. 0 means no limit."
-          }
-        }
-      }
     },
     "scripts": {
-      "compile": "tsc",
-      "watch": "tsc --watch"
+        "compile": "tsc",
+        "watch": "tsc --watch"
     },
     "devDependencies": {
-      "@types/micromatch": "^4.0.9",
-      "@types/node": "^20.0.0",
-      "@types/vscode": "^1.96.0",
-      "typescript": "^5.7.2"
+        "@types/micromatch": "^4.0.9",
+        "@types/node": "^20.0.0",
+        "@types/vscode": "^1.96.0",
+        "typescript": "^5.7.2"
     },
     "dependencies": {
-      "micromatch": "^4.0.8"
+        "micromatch": "^4.0.8"
     }
-  }
-  
+}
